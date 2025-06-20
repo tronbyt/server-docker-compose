@@ -10,3 +10,4 @@ cd tronbyt-server
 edit .env manually to add ip or hostname
 docker-compose up -d
 ```
+Wait up to 60 seconds for the server to come up. It has to download the apps repo on first boot.
