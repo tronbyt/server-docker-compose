@@ -1,20 +1,22 @@
 services:
   web:
-    image: ghcr.io/tronbyt/server:latest
+    image: ghcr.io/tronbyt/server:1 # latest v1.x.x release tag
     restart: unless-stopped
     ports:
       - "${SERVER_PORT}:8000" # Map server port on the host to port 8000 in the container
-    user: "tronbyt:tronbyt"
     init: true
     volumes:
       - "/etc/localtime:/etc/localtime:ro" # used to sync docker with host time
       - users:/app/users
       - data:/app/data
     environment:
-      - SERVER_HOSTNAME=${SERVER_HOSTNAME_OR_IP:?SERVER_HOSTNAME_OR_IP MUST BE SET IN .env FILE !!!!!!!!!!!!!!!!!.}
-      - SERVER_PORT
+      - PUID=${UID:-1000}
+      - PGID=${GID:-${UID:-1000}}
       - SYSTEM_APPS_REPO
       - PRODUCTION
+      - ENABLE_USER_REGISTRATION
+      - WEB_CONCURRENCY
+      - TRONBYT_HOST=0.0.0.0
     healthcheck:
       test: ["CMD", "python3", "/app/healthcheck.py", "http://localhost:8000/health"]
       interval: 1m30s
