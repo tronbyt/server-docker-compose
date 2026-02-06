@@ -67,12 +67,24 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
 done
 
 if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
-    echo -e "\rWarning: Server did not become ready within $MAX_RETRIES attempts"
+    echo -e "\rWarning: Server did not become ready within 2 minutes"
     echo ""
     echo "Docker Compose logs:"
     echo "================================================"
     sudo docker compose logs --tail=50
     echo "================================================"
+    echo ""
+    echo "ERROR: The server appears to have failed to start."
+    echo ""
+    echo "This may be due to:"
+    echo "  - The system-apps download taking a long time"
+    echo "  - The system-apps download failing"
+    echo ""
+    echo "Suggestions:"
+    echo "  - Try accessing the server later at: http://$(hostname).local:8000"
+    echo "  - Or try running this setup script again"
+    echo ""
+    exit 1
 fi
 
 # Get the Raspberry Pi's IP address
