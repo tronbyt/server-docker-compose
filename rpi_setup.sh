@@ -4,7 +4,7 @@
 set -e
 
 echo "================================================"
-echo "Raspberry Pi Server Setup Script"
+echo "Raspberry Pi Tronbyt Server Setup Script"
 echo "================================================"
 echo ""
 
@@ -71,14 +71,14 @@ if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
     echo ""
     echo "Docker Compose logs:"
     echo "================================================"
-    sudo docker compose logs --tail=50
+    sudo docker compose logs
     echo "================================================"
     echo ""
     echo "ERROR: The server appears to have failed to start."
     echo ""
     echo "This may be due to:"
-    echo "  - The system-apps download taking a long time"
-    echo "  - The system-apps download failing"
+    echo "  - The system-apps/firmware download taking too long"
+    echo "  - The system-apps/firmware download failing"
     echo ""
     echo "Suggestions:"
     echo "  - Try accessing the server later at: http://$(hostname).local:8000"
@@ -100,7 +100,7 @@ echo "You can check the status with: sudo docker compose ps"
 echo "You can upgrade the container with: sudo docker compose pull ; sudo docker compose up -d"
 echo ""
 echo "Access your server at: http://$PI_IP:8000"
-echo "                 or: http://$(hostname).local:8000"
+echo "                   or: http://$(hostname).local:8000"
 echo ""
 echo "Note: You may need to log out and back in for docker group"
 echo "      permissions to take effect (to run docker without sudo)"
