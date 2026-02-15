@@ -1,4 +1,5 @@
 # Tronbyt server-docker-compose files
+[Demo Server](https://tronbyt.clodhost.com/auth/register)
 
 This is a minimal Docker setup to run the Tronbyt server.  For the full code and details of the server go to the [server](https://github.com/tronbyt/server) repo.
 
